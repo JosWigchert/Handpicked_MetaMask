@@ -1,0 +1,59 @@
+If commands dont work use
+	Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+	
+Install npm with winget
+	winget install -e --id OpenJS.NodeJS
+	
+Install all npm packages needed for decentralized web app
+	npm install -g truffle 
+		// for developing decentralized apps
+	npm install -g solc 
+		// for smart contracts
+	npm install -g ganache 
+		// ethereum emulator
+		
+Setup project
+	truffle unbox react
+		// initialize project
+
+Start project
+	ganache -m "<string of 12 words used by metamask>"
+		//
+	truffle migrate --reset --network develop
+		// start truffle migrate on develop network
+	cd client
+		// go to client map
+	npm install
+	npm start
+	
+Notes
+	check if the host and network_id are set in the truffle-config.js
+		// should look like this
+	
+		const path = require("path");
+
+		module.exports = {
+		  // See <http://truffleframework.com/docs/advanced/configuration>
+		  // to customize your Truffle configuration!
+		  contracts_build_directory: path.join(__dirname, "client/src/contracts"),
+		  networks: {
+			develop: {
+			  host: "127.0.0.1",
+			  network_id: "*",
+			  port: 8545
+			}
+		  }
+		};
+	
+	check npm start gives errors, change the start script in package.json
+		// change under script the start field to 
+		// react-scripts --openssl-legacy-provider start
+		// should look like this
+		
+		"scripts": {
+			"start": "react-scripts --openssl-legacy-provider start",
+			"build": "react-scripts build",
+			"test": "react-scripts test",
+			"eject": "react-scripts eject"
+		},
+		
